@@ -1,0 +1,19 @@
+version:  '3'
+
+services:
+  # ... Configuration ...
+  database:
+    image: 'mongo'
+    container_name: 'mongoMovie'
+    # DB Config
+    environment:
+      - MONGO_INITDB_DATABASE=movie
+      - MONGO_INITDB_ROOT_USERNAME=userName
+      - MONGO_INITDB_ROOT_PASSWORD=passWord
+    # Directories and data
+    volumes:
+      - ./initMongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./volumeMongo:/data/db
+    # Network ports
+    ports:
+      - '27017-27019:27017-27019'
